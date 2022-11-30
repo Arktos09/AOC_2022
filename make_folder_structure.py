@@ -7,7 +7,7 @@ from shutil import copyfile
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
 
-subfolder="dominik" #### CHANGE HERE!
+subfolder="michael" #### CHANGE HERE!
 template= "dominik_template.py" #### CHANGE HERE!
 
 for day in range(1,26):
