@@ -8,7 +8,7 @@ CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
 
 subfolder="michael" #### CHANGE HERE!
-template= "dominik_template.py" #### CHANGE HERE!
+template= "michael_template.py" #### CHANGE HERE!
 
 for day in range(1,26):
     folder_name = f'day_{str(day).zfill(2)}'
