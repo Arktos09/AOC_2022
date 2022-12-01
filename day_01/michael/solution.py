@@ -1,14 +1,4 @@
 import os
-import sys
-import pandas as pd
-import numpy as np
-import math
-import datetime
-import operator
-from copy import deepcopy
-from collections import Counter, ChainMap, defaultdict, deque
-from itertools import cycle
-from functools import reduce
 
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
@@ -23,7 +13,12 @@ def read_input_text():
 
 
 def part_a():
-    pass
+    txt = read_input_text()
+    print(max(sum((int(num) for num in chunk.split("\n"))) for chunk in txt.split("\n\n") ))
 
 def part_b():
-    pass
+    txt = read_input_text()
+    print(sum(sorted([sum((int(num) for num in chunk.split("\n"))) for chunk in txt.split("\n\n")])[-3:]))
+
+part_a()
+part_b()
