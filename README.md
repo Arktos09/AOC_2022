@@ -6,4 +6,4 @@ Advent of Code 2022
 
 
   - Private Leaderboard:  [Leaderboard](https://adventofcode.com/2022/leaderboard/private/)
-    - Invite Code:          660956-2f25539c
+    - Invite Code:          ask your trusty admin
