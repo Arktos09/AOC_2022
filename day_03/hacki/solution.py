@@ -36,7 +36,7 @@ def get_common_item(list_in: list):
     return [set.intersection(*splitted_item) for splitted_item in splitted_items]
 
 
-
+# https://grabthiscode.com/python/split-list-on-every-nth-element-python
 def chunks(list_in, n):
     # For item i in a range that is a length of l,
     for i in range(0, len(list_in), n):
