@@ -23,7 +23,25 @@ def read_input_text():
 
 
 def part_a():
-    pass
+    result = 0
+    for line in read_input_lines():
+        a,b,c,d = [int(x) for x in line.replace("-", ",").split(",")]
+        s1, s2 = set(range(a,b+1)),  set(range(c,d+1))
+        if (not (s1-s2)) or (not (s2-s1)):
+            result+=1
+
+    print(result)
+
 
 def part_b():
-    pass
+    result = 0
+    for line in read_input_lines():
+        a, b, c, d = [int(x) for x in line.replace("-", ",").split(",")]
+        s1, s2 = set(range(a, b + 1)), set(range(c, d + 1))
+        if s1 & s2:
+            result += 1
+
+    print(result)
+
+part_a()
+part_b()
