@@ -44,8 +44,7 @@ def get_range_pairs(list_input: list) -> list:
     
     prepared_pairs = [pairs for pairs in list_input]
 
-    a = [set_comparer_a([ranger(p) for p in pair]) for pair in prepared_pairs]
-    b = [set_comparer_b([ranger(p) for p in pair]) for pair in prepared_pairs]
+    a,b = [[func([ranger(p) for p in pair]) for pair in prepared_pairs] for func in [set_comparer_a, set_comparer_b]]
     return a, b
 
 ranges = get_ranges(puzzle_list)
