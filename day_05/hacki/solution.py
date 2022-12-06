@@ -18,13 +18,25 @@ def get_stackpole(stack_puzzle: list) -> list:
     for crates in stack_puzzle[::-1]:
         crates = re.sub(r'^\D\W\S', '', crates)
         crates = crates.replace('    ', ' ').split(' ')
-        #crates = crates.replace('  ', ' ')
         try:
             crates = [int(x) for x in crates if x]
         except:
             crates = crates
         stackpole.append(crates)
     return stackpole
+
+
+def crane(command: list) -> dict:
+
+    from collections import Counter
+    cmd_reversed = command[::-1]
+    # stack_command_copy = stack_command_dict.copy()
+    moving_stacks = stack_command_dict[cmd_reversed[1]][::-1][:cmd_reversed[2]]
+    stack_command_dict[cmd_reversed[0]
+                       ] = stack_command_dict[cmd_reversed[0]]+moving_stacks
+    stack_command_dict[cmd_reversed[1]] = list(
+        Counter(stack_command_dict[cmd_reversed[1]]) - Counter(moving_stacks))
+    return stack_command_dict
 
 
 filename = 'debug.txt'
@@ -43,25 +55,15 @@ for stack in stackpole[0]:
 for key, value in stack_command_dict.items():
     stack_command_dict[key] = list(filter(None, value))
 
-# print(stack_command_dict)
-
-
-def crane(command: list) -> dict:
-
-    from collections import Counter
-    cmd_reversed = command[::-1]
-    # stack_command_copy = stack_command_dict.copy()
-    moving_stacks = stack_command_dict[cmd_reversed[1]][::-1][:cmd_reversed[2]]
-    stack_command_dict[cmd_reversed[0]
-                       ] = stack_command_dict[cmd_reversed[0]]+moving_stacks
-    stack_command_dict[cmd_reversed[1]] = list(
-        Counter(stack_command_dict[cmd_reversed[1]]) - Counter(moving_stacks))
-    return stack_command_dict
-
-
 for command in commands:
     crane(command)
 
-Top_crates = ''.join([value[-1] for value in stack_command_dict.values() if value])
+for key, value in stack_command_dict.items():
+    if len(stack_command_dict[key]) == 0:
+        stack_command_dict[key] = [' ']
 
-print(re.sub(r'[^A-Za-z]','',Top_crates))
+print(stack_command_dict)
+
+Top_crates = ''.join([value[-1] for value in stack_command_dict.values() if value])
+print(Top_crates)
+print(re.sub(r'[^A-Za-z ]','',Top_crates))
