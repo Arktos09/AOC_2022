@@ -20,7 +20,6 @@ def get_first_signal(code_in:str, shift_chunk:int)-> int:
     shift_list = []
     while shifted < len(code_in)-shift_chunk:
         shift = shifter(code_in, shifted, shift_chunk+shifted)
-        signal = f'{signal}{code_in[4+shifted]}'
         shifted += 1
         shift_list.append(shift)
     
