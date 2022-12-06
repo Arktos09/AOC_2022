@@ -34,14 +34,16 @@ def crane(command: list) -> dict:
     moving_stacks = stack_command_dict[cmd_reversed[1]][::-1][:cmd_reversed[2]]
     stack_command_dict[cmd_reversed[0]
                        ] = stack_command_dict[cmd_reversed[0]]+moving_stacks
-    if cmd_reversed[2] <= len(stack_command_dict[cmd_reversed[1]]):
-        stack_command_dict[cmd_reversed[1]
-                           ] = stack_command_dict[cmd_reversed[1]][cmd_reversed[2]:]
+    #if cmd_reversed[2] < len(stack_command_dict[cmd_reversed[1]]):
+    #    stack_command_dict[cmd_reversed[1]
+    #                       ] = stack_command_dict[cmd_reversed[1]][cmd_reversed[2]:]
+    stack_command_dict[cmd_reversed[1]] = list(
+        Counter(stack_command_dict[cmd_reversed[1]]) - Counter(moving_stacks))
     return stack_command_dict
 
 
 filename = 'debug.txt'
-# filename = 'day_4_1.txt'
+# filename = 'day_5_1.txt'
 puzzle_list = get_fileinput(filename)
 stack_commands = [list(g) for k, g in groupby(puzzle_list, key=bool) if k]
 stackpole = get_stackpole(stack_commands[0])
