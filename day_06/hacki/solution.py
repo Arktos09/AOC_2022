@@ -6,7 +6,7 @@ def get_fileinput(filename: str) -> list:
         content = f.readlines()
     return [x.strip('\n') for x in content]
 
-def shifter(code_in, start_shift: int, shift: int) -> set:
+def shifter(code_in, start_shift: int, shift: int) -> list:
     return code_in[start_shift:shift]
 
 def get_first_signal(code_in:str, shift_chunk:int)-> int:
