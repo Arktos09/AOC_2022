@@ -23,7 +23,18 @@ def read_input_text():
 
 
 def part_a():
-    pass
+    txt = read_input_text()
+    for ix, option in enumerate(zip(*(txt[i:] for i in range(4)))):
+        if len(set(option)) == 4:
+            print(ix + 4)
+            break
 
 def part_b():
-    pass
+    txt = read_input_text()
+    for ix, option in enumerate(zip(*(txt[i:] for i in range(14)))):
+        if len(set(option)) == 14:
+            print(ix + 14)
+            break
+
+part_a()
+part_b()
