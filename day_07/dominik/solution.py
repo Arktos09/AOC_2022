@@ -19,7 +19,7 @@ def read_input_text():
 
 def puzzle1():
     strout = load_input_list()
-    tree = {"/": {}}
+    tree = {"/": 0}
     path = "/"
     size_counter = 0
     for i, line in enumerate(strout):
