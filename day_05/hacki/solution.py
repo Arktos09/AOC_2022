@@ -28,24 +28,25 @@ def get_stackpole(stack_puzzle: list) -> list:
 
 def crane(command: list) -> dict:
 
-    from collections import Counter
     cmd_reversed = command[::-1]
-    # stack_command_copy = stack_command_dict.copy()
-    moving_stacks = stack_command_dict[cmd_reversed[1]][::-1][:cmd_reversed[2]]
+    # part a
+    # moving_stacks = stack_command_dict[cmd_reversed[1]][::-1][:cmd_reversed[2]]
+    # part b
+    moving_stacks = stack_command_dict[cmd_reversed[1]][-cmd_reversed[2]:]
     stack_command_dict[cmd_reversed[0]
                        ] = stack_command_dict[cmd_reversed[0]]+moving_stacks
-    stack_command_dict[cmd_reversed[1]] = list(
-        Counter(stack_command_dict[cmd_reversed[1]]) - Counter(moving_stacks))
+  
+    stack_command_dict[cmd_reversed[1]
+                       ] = stack_command_dict[cmd_reversed[1]][:-cmd_reversed[2]]
     return stack_command_dict
 
 
 filename = 'debug.txt'
-# filename = 'day_4_1.txt'
+filename = 'day_5_1.txt'
 puzzle_list = get_fileinput(filename)
 stack_commands = [list(g) for k, g in groupby(puzzle_list, key=bool) if k]
 stackpole = get_stackpole(stack_commands[0])
-commands = [list(map(int, re.sub(r'\D', '', command)))
-            for command in stack_commands[1]]
+commands = [list(map(int, filter(lambda x: x.isdigit(), cmd))) for cmd in [command.split(' ') for command in stack_commands[1]]]
 
 stack_command_dict = defaultdict(list)
 for stack in stackpole[0]:
@@ -60,10 +61,10 @@ for command in commands:
 
 for key, value in stack_command_dict.items():
     if len(stack_command_dict[key]) == 0:
-        stack_command_dict[key] = [' ']
+        stack_command_dict[key] = ['_']
 
 print(stack_command_dict)
 
-Top_crates = ''.join([value[-1] for value in stack_command_dict.values() if value])
+Top_crates = ''.join([value[-1] for value in stack_command_dict.values()])
 print(Top_crates)
-print(re.sub(r'[^A-Za-z ]','',Top_crates))
+print(re.sub(r'[^A-Za-z_]', '', Top_crates))
