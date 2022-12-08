@@ -16,3 +16,10 @@ def puzzle1():
 
 def puzzle2():
     pass
+
+if __name__ == '__main__':
+    a = puzzle1()
+    print(f"Answer to Puzzle: {a}")
+
+    b = puzzle2()
+    print(f"Answer to Puzzle: {b}")
