@@ -1,14 +1,5 @@
 import os
-import sys
-import pandas as pd
-import numpy as np
-import math
-import datetime
-import operator
-from copy import deepcopy
-from collections import Counter, ChainMap, defaultdict, deque
-from itertools import cycle
-from functools import reduce
+
 
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
@@ -21,9 +12,26 @@ def read_input_text():
     with open('input.txt', 'r') as fh:
         return fh.read().strip()
 
+x = 1
+t = 1
+t2x = {1:1}
+for inst in read_input_lines():
+    match inst.split():
+        case["noop"]:
+            t+=1
+        case['addx', num]:
+            t2x[t+1] = x
+            x += int(num)
+            t+=2
+    t2x[t] = x
 
 def part_a():
-    pass
 
+    print(sum((t2x[t] * t for t in range(20,221,40))))
+
+part_a()
 def part_b():
-    pass
+    for start in range(1,221, 40):
+        print("".join("#" if abs(t2x[t] - pos) <= 1 else "." for pos,t in enumerate(range(start, start+40))))
+
+part_b()
