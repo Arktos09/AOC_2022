@@ -4,7 +4,7 @@ import sys
 in_file = "input.txt"
 import re
 import numpy as np
-
+import math
 def load_input_list():
     with open(in_file, 'r') as f:
         return [line.rstrip('\n') for line in f]
@@ -42,8 +42,8 @@ class Monkey():
         else:
             return self.test_false, new_worry_level
 
-    def throw_item_to_monkey_x_2(self, worry_level):
-        new_worry_level = worry_level
+    def throw_item_to_monkey_x_2(self, worry_level, total):
+        new_worry_level = worry_level % total
         if  new_worry_level % self.test == 0:
             return self.test_true, new_worry_level
         else:
@@ -90,26 +90,28 @@ def puzzle1():
 
 def puzzle2():
     monkey_dict = create_the_monkey_house()
+
+    total_prod_test= []
+    for monkey in monkey_dict.values():
+        total_prod_test.append(monkey.test)
+
     for round in range(1, 10001, 1):
+        print(f"Currently calculating round {round}", end="\r")
         for monkey_name in monkey_dict.keys():
             active_monkey = monkey_dict[monkey_name]
-            # print(active_monkey.name)
-            # print(active_monkey.items)
             for worry_level in active_monkey.items:
                 # get new worry level after inspection by monkey
                 worry_level = active_monkey.inspect_item(worry_level)
                 # append item to item list of other monkeys
-                throw_to, new_worry_level = active_monkey.throw_item_to_monkey_x_2(worry_level)
-                # print(f"Throw to monkey {throw_to} with worry level {new_worry_level}")
+                throw_to, new_worry_level = active_monkey.throw_item_to_monkey_x_2(worry_level, np.product(total_prod_test))
                 monkey_dict[f"Monkey {throw_to}"].items.append(new_worry_level)
-            print(round, monkey_name, active_monkey.inspection_counter)
             active_monkey.clean_inventory()
 
     result = []
     for monkey in monkey_dict.values():
         result.append(monkey.inspection_counter)
 
-    return np.product(sorted(result)[-2:])
+    return math.prod(sorted(result)[-2:])
 
 
 if __name__ == '__main__':
