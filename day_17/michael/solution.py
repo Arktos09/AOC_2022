@@ -47,8 +47,7 @@ def part_a():
             windix += 1
             droppedrock = {point -1 for point in rock}
             if any((point.real <= floor for point in droppedrock )) or (droppedrock & map): #our rock would collide with floor or other rock
-                for point in rock:
-                    map.add(point)
+                map = map | rock
                 highest_point = max((point.real for point in map))
 
                 break
@@ -104,8 +103,7 @@ def part_b():
             windix += 1
             droppedrock = {point - 1 for point in rock}
             if (droppedrock & map):  # our rock would collide with floor or other rock
-                for point in rock:
-                    map.add(point)
+                map = map|rock
                 highest_point = max((point.real for point in map))
                 rocknr +=1
                 rock2score[rocknr] = highest_point + 1
